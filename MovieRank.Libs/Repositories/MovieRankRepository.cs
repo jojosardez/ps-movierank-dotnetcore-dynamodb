@@ -19,5 +19,11 @@ namespace MovieRank.Libs.Repositories
         {
             return await _context.ScanAsync<MovieDb>(new List<ScanCondition>()).GetRemainingAsync();
         }
+
+        public async Task<MovieDb> GetMovie(int userId, string movieName)
+        {
+            // uses dynamodb partition and sortkey
+            return await _context.LoadAsync<MovieDb>(userId, movieName);
+        }
     }
 }

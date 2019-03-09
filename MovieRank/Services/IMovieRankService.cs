@@ -7,5 +7,6 @@ namespace MovieRank.Services
     public interface IMovieRankService
     {
         Task<IEnumerable<MovieResponse>> GetAllItemsFromDatabase();
+        Task<MovieResponse> GetMovie(int userId, string movieName);
     }
 }
