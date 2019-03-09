@@ -28,5 +28,11 @@ namespace MovieRank.Services
             var response = await _movieRankRepository.GetMovie(userId, movieName);
             return _mapper.ToMovieContract(response);
         }
+
+        public async Task<IEnumerable<MovieResponse>> GetUsersRankedMoviesByMovieTitle(int userId, string movieName)
+        {
+            var response = await _movieRankRepository.GetUsersRankedMoviesByMovieTitle(userId, movieName);
+            return _mapper.ToMovieContract(response);
+        }
     }
 }
