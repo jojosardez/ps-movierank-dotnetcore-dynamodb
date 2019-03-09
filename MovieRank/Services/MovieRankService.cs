@@ -40,5 +40,12 @@ namespace MovieRank.Services
             var response = await _movieRankRepository.GetUsersRankedMoviesByMovieTitle(userId, movieName);
             return _mapper.ToMovieContract(response);
         }
+
+        public async Task UpdateMovie(int userId, MovieUpdateRequest request)
+        {
+            var response = await _movieRankRepository.GetMovie(userId, request.MovieName);
+            var movieDb = _mapper.ToMovieDbModel(userId, response, request);
+            await _movieRankRepository.UpdateMovie(movieDb);
+        }
     }
 }

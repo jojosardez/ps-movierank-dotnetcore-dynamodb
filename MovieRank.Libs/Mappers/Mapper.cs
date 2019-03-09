@@ -37,5 +37,18 @@ namespace MovieRank.Libs.Mappers
                 RankedDateTime = DateTime.UtcNow.ToString()
             };
         }
+
+        public MovieDb ToMovieDbModel(int userId, MovieDb current, MovieUpdateRequest updated)
+        {
+            return new MovieDb
+            {
+                UserId = userId,
+                MovieName = current.MovieName,
+                Description = current.Description,
+                Actors = current.Actors,
+                Ranking = updated.Ranking,
+                RankedDateTime = DateTime.UtcNow.ToString()
+            };
+        }
     }
 }
