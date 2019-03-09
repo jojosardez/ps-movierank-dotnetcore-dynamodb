@@ -33,10 +33,18 @@ namespace MovieRank.Controllers
 
         [HttpGet]
         [Route("user/{userId}/rankedMovies/{movieName}")]
-        public async Task<IEnumerable<MovieResponse>>GetUsersRankedMoviesByMovieTitle(int userId, string movieName)
+        public async Task<IEnumerable<MovieResponse>> GetUsersRankedMoviesByMovieTitle(int userId, string movieName)
         {
             var result = await _movieRankService.GetUsersRankedMoviesByMovieTitle(userId, movieName);
             return result;
+        }
+
+        [HttpPost]
+        [Route("{userId}")]
+        public async Task<IActionResult> AddMovie(int userId, [FromBody] MovieRankRequest movieRankRequest)
+        {
+            await _movieRankService.AddMovie(userId, movieRankRequest);
+            return Ok();
         }
     }
 }

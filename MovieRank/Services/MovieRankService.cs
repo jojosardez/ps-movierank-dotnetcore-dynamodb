@@ -17,6 +17,12 @@ namespace MovieRank.Services
             _mapper = mapper;
         }
 
+        public async Task AddMovie(int userId, MovieRankRequest movieRankRequest)
+        {
+            var movieDb = _mapper.ToMovieDbModel(userId, movieRankRequest);
+            await _movieRankRepository.AddMovie(movieDb);
+        }
+
         public async Task<IEnumerable<MovieResponse>> GetAllItemsFromDatabase()
         {
             var response = await _movieRankRepository.GetAllItems();

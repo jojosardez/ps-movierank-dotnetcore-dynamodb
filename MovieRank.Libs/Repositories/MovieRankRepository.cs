@@ -1,6 +1,7 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
+using MovieRank.Contracts;
 using MovieRank.Libs.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,6 +15,12 @@ namespace MovieRank.Libs.Repositories
         public MovieRankRepository(IAmazonDynamoDB dynamoDbClient)
         {
             _context = new DynamoDBContext(dynamoDbClient);
+        }
+
+        public async Task AddMovie(MovieDb movieDb)
+        {
+            // save the model to the dynamodb table
+            await _context.SaveAsync<MovieDb>(movieDb);
         }
 
         public async Task<IEnumerable<MovieDb>> GetAllItems()
