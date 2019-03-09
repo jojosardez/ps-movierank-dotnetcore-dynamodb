@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Amazon;
 using Amazon.DynamoDBv2;
+using Amazon.Extensions.NETCore.Setup;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using MovieRank.Libs.Mappers;
+using MovieRank.Libs.Repositories;
+using MovieRank.Services;
 
 namespace MovieRank
 {
@@ -17,7 +17,17 @@ namespace MovieRank
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDefaultAWSOptions(
+            new AWSOptions
+            {
+                Region = RegionEndpoint.GetBySystemName("us-west-2")
+            });
             services.AddAWSService<IAmazonDynamoDB>();
+
+            services.AddSingleton<IMovieRankService, MovieRankService>();
+            services.AddSingleton<IMovieRankRepository, MovieRankRepository>();
+            services.AddSingleton<IMapper, Mapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,4 +8,8 @@
     <PackageReference Include="awssdk.dynamodbv2" Version="3.3.17.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MovieRank.Contracts\MovieRank.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
