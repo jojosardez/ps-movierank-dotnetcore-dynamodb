@@ -1,7 +1,9 @@
 ﻿using MovieRank.Contracts;
 using MovieRank.Libs.Mappers;
 using MovieRank.Libs.Repositories;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MovieRank.Services
@@ -33,6 +35,17 @@ namespace MovieRank.Services
         {
             var response = await _movieRankRepository.GetMovie(userId, movieName);
             return _mapper.ToMovieContract(response);
+        }
+
+        public async Task<MovieRankResponse> GetMovieRank(string movieName)
+        {
+            var response = await _movieRankRepository.GetMovieRank(movieName);
+            var overallMovieRanking = Math.Round(response.Select(x => x.Ranking).Average());
+            return new MovieRankResponse
+            {
+                MovieName = movieName,
+                OverallRanking = overallMovieRanking
+            };
         }
 
         public async Task<IEnumerable<MovieResponse>> GetUsersRankedMoviesByMovieTitle(int userId, string movieName)

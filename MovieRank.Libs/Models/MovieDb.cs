@@ -8,6 +8,7 @@ namespace MovieRank.Libs.Models
     {
         [DynamoDBHashKey]
         public int UserId { get; set; }
+        [DynamoDBGlobalSecondaryIndexHashKey]
         public string MovieName { get; set; }
         public string Description { get; set; }
         public List<string> Actors { get; set; }

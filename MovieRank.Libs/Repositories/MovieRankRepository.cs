@@ -34,6 +34,17 @@ namespace MovieRank.Libs.Repositories
             return await _context.LoadAsync<MovieDb>(userId, movieName);
         }
 
+        public async Task<IEnumerable<MovieDb>> GetMovieRank(string movieName)
+        {
+            // use query async and operation config to query via the secondary index
+
+            var config = new DynamoDBOperationConfig
+            {
+                IndexName = "MovieName-index"
+            };
+            return await _context.QueryAsync<MovieDb>(movieName, config).GetRemainingAsync();
+        }
+
         public async Task<IEnumerable<MovieDb>> GetUsersRankedMoviesByMovieTitle(int userId, string movieName)
         {
             // uses scan and query - for partial matching
