@@ -9,8 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="awssdk.dynamodbv2" Version="3.3.17.12" />
+    <PackageReference Include="awssdk.extensions.netcore.setup" Version="3.3.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
 </Project>
